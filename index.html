@@ -1,1 +1,678 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biodata GitHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            width: 100%;
+            background: rgba(15, 25, 35, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            animation: fadeIn 1.2s ease-out;
+            position: relative;
+        }
+
+        /* Animasi latar belakang */
+        .bg-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            animation: float 6s infinite ease-in-out;
+        }
+
+        .circle:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .circle:nth-child(2) {
+            width: 100px;
+            height: 100px;
+            top: 60%;
+            right: 10%;
+            animation-delay: 1s;
+        }
+
+        .circle:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            bottom: 20%;
+            left: 15%;
+            animation-delay: 2s;
+        }
+
+        .circle:nth-child(4) {
+            width: 120px;
+            height: 120px;
+            top: 20%;
+            right: 15%;
+            animation-delay: 3s;
+        }
+
+        /* Header */
+        .header {
+            padding: 40px 40px 20px;
+            text-align: center;
+            background: linear-gradient(90deg, rgba(32, 58, 67, 0.9), rgba(44, 83, 100, 0.9));
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .profile-img-container {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            overflow: hidden;
+            border: 5px solid #4db8ff;
+            box-shadow: 0 10px 25px rgba(77, 184, 255, 0.4);
+            animation: pulse 2.5s infinite alternate, rotate 20s linear infinite;
+            animation-play-state: running;
+        }
+
+        .profile-img-container:hover {
+            animation-play-state: paused;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .profile-img-container:hover .profile-img {
+            transform: scale(1.1);
+        }
+
+        .name {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: linear-gradient(90deg, #4db8ff, #00ffcc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 5px 15px rgba(77, 184, 255, 0.3);
+            animation: textGlow 3s infinite alternate;
+        }
+
+        .title {
+            font-size: 1.4rem;
+            color: #a0e7ff;
+            margin-bottom: 15px;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .social-icon:hover::before {
+            left: 100%;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .github { background: linear-gradient(45deg, #333, #6e5494); }
+        .linkedin { background: linear-gradient(45deg, #0077b5, #00a0dc); }
+        .twitter { background: linear-gradient(45deg, #1da1f2, #1a91da); }
+        .instagram { background: linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045); }
+
+        /* Konten */
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: slideUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+            border-color: rgba(77, 184, 255, 0.3);
+        }
+
+        .section:nth-child(1) { animation-delay: 0.2s; }
+        .section:nth-child(2) { animation-delay: 0.4s; }
+        .section:nth-child(3) { animation-delay: 0.6s; }
+        .section:nth-child(4) { animation-delay: 0.8s; }
+
+        .section-title {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #4db8ff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            font-size: 1.3rem;
+        }
+
+        .about-text {
+            line-height: 1.7;
+            color: #d0e7ff;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-item {
+            margin-bottom: 15px;
+        }
+
+        .skill-name {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+
+        .skill-bar {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            border-radius: 5px;
+            background: linear-gradient(90deg, #4db8ff, #00ffcc);
+            position: relative;
+            width: 0;
+            animation: fillBar 1.5s ease-out forwards;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+        }
+
+        .project-item {
+            background: rgba(77, 184, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid transparent;
+        }
+
+        .project-item:hover {
+            background: rgba(77, 184, 255, 0.2);
+            border-color: #4db8ff;
+            transform: scale(1.05);
+        }
+
+        .project-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #4db8ff;
+        }
+
+        .project-name {
+            font-size: 0.9rem;
+        }
+
+        .contact-list {
+            list-style: none;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .contact-item:hover {
+            background: rgba(77, 184, 255, 0.1);
+            transform: translateX(5px);
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(77, 184, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.2rem;
+            color: #4db8ff;
+        }
+
+        .contact-text {
+            color: #d0e7ff;
+        }
+
+        /* Footer */
+        .footer {
+            padding: 25px;
+            text-align: center;
+            background: rgba(15, 25, 35, 0.9);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #a0e7ff;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .github-stats {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            padding: 8px 15px;
+            background: rgba(77, 184, 255, 0.1);
+            border-radius: 20px;
+            font-family: 'Roboto Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 10px 25px rgba(77, 184, 255, 0.4); }
+            100% { box-shadow: 0 10px 35px rgba(77, 184, 255, 0.8), 0 0 50px rgba(77, 184, 255, 0.3); }
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            25% { transform: translateY(-20px) translateX(10px); }
+            50% { transform: translateY(-10px) translateX(-10px); }
+            75% { transform: translateY(20px) translateX(5px); }
+        }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 5px 15px rgba(77, 184, 255, 0.3); }
+            100% { text-shadow: 0 5px 20px rgba(77, 184, 255, 0.6), 0 0 30px rgba(77, 184, 255, 0.4); }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fillBar {
+            from { width: 0; }
+        }
+
+        /* Toggle Animations */
+        .animation-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        .toggle-btn {
+            background: rgba(15, 25, 35, 0.9);
+            color: #4db8ff;
+            border: 1px solid #4db8ff;
+            padding: 10px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .toggle-btn:hover {
+            background: rgba(77, 184, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <div class="animation-control">
+        <button class="toggle-btn" id="toggleAnimations">
+            <i class="fas fa-play"></i> <span>Pause Animations</span>
+        </button>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <div class="profile-img-container">
+                <img src="https://avatars.githubusercontent.com/u/583231?v=4" alt="Profile Picture" class="profile-img" id="profileImg">
+            </div>
+            <h1 class="name" id="name">Nama Anda</h1>
+            <p class="title" id="title">Full Stack Developer & Open Source Enthusiast</p>
+            
+            <div class="social-links">
+                <a href="https://github.com/username" class="social-icon github" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://linkedin.com/in/username" class="social-icon linkedin" target="_blank">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://twitter.com/username" class="social-icon twitter" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://instagram.com/username" class="social-icon instagram" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-user"></i> Tentang Saya</h2>
+                <p class="about-text" id="aboutText">
+                    Saya seorang pengembang perangkat lunak dengan passion untuk menciptakan solusi teknologi yang inovatif. 
+                    Memiliki pengalaman lebih dari 5 tahun dalam pengembangan web dan mobile. 
+                    Senang belajar teknologi baru dan berkontribusi pada proyek open source.
+                </p>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-code"></i> Skills & Teknologi</h2>
+                <ul class="skill-list">
+                    <li class="skill-item">
+                        <div class="skill-name">
+                            <span>JavaScript / TypeScript</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="95"></div>
+                        </div>
+                    </li>
+                    <li class="skill-item">
+                        <div class="skill-name">
+                            <span>React & Vue.js</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="90"></div>
+                        </div>
+                    </li>
+                    <li class="skill-item">
+                        <div class="skill-name">
+                            <span>Node.js</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="88"></div>
+                        </div>
+                    </li>
+                    <li class="skill-item">
+                        <div class="skill-name">
+                            <span>Python</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="80"></div>
+                        </div>
+                    </li>
+                    <li class="skill-item">
+                        <div class="skill-name">
+                            <span>Cloud & DevOps</span>
+                            <span>75%</span>
+                        </div>
+                        <div class="skill-bar">
+                            <div class="skill-progress" data-width="75"></div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-project-diagram"></i> Proyek Terbaru</h2>
+                <div class="project-grid">
+                    <div class="project-item">
+                        <div class="project-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="project-name">Analytics Dashboard</div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div class="project-name">E-Commerce App</div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="project-name">AI Chatbot</div>
+                    </div>
+                    <div class="project-item">
+                        <div class="project-icon">
+                            <i class="fas fa-gamepad"></i>
+                        </div>
+                        <div class="project-name">Game Engine</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title"><i class="fas fa-envelope"></i> Kontak</h2>
+                <ul class="contact-list">
+                    <li class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-text">email@example.com</div>
+                    </li>
+                    <li class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">Jakarta, Indonesia</div>
+                    </li>
+                    <li class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="contact-text">www.websiteanda.com</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2023 GitHub Profile. Dibuat dengan ❤️ dan banyak kode.</p>
+            <div class="github-stats">
+                <div class="stat">
+                    <i class="fas fa-star"></i> 128 Repositories
+                </div>
+                <div class="stat">
+                    <i class="fas fa-users"></i> 42 Followers
+                </div>
+                <div class="stat">
+                    <i class="fas fa-heart"></i> 89 Contributions
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Inisialisasi progress bar
+        document.addEventListener('DOMContentLoaded', function() {
+            const progressBars = document.querySelectorAll('.skill-progress');
+            progressBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                bar.style.width = width + '%';
+            });
+
+            // Toggle animasi
+            const toggleBtn = document.getElementById('toggleAnimations');
+            let animationsPaused = false;
+            
+            toggleBtn.addEventListener('click', function() {
+                animationsPaused = !animationsPaused;
+                
+                const allAnimations = document.querySelectorAll('*');
+                allAnimations.forEach(el => {
+                    if (animationsPaused) {
+                        el.style.animationPlayState = 'paused';
+                    } else {
+                        el.style.animationPlayState = 'running';
+                    }
+                });
+                
+                const icon = toggleBtn.querySelector('i');
+                const text = toggleBtn.querySelector('span');
+                
+                if (animationsPaused) {
+                    icon.className = 'fas fa-play';
+                    text.textContent = 'Play Animations';
+                } else {
+                    icon.className = 'fas fa-pause';
+                    text.textContent = 'Pause Animations';
+                }
+            });
+
+            // Ganti data profil dengan data GitHub Anda
+            // Anda bisa mengganti dengan data dinamis dari API GitHub
+            const githubUsername = "username-github-anda"; // Ganti dengan username GitHub Anda
+            
+            // Contoh pengambilan data dari API GitHub (jika dihosting di web)
+            // fetch(`https://api.github.com/users/${githubUsername}`)
+            //     .then(response => response.json())
+            //     .then(data => {
+            //         document.getElementById('name').textContent = data.name || data.login;
+            //         document.getElementById('profileImg').src = data.avatar_url;
+            //         document.getElementById('aboutText').textContent = data.bio || 'Tidak ada bio tersedia';
+            //     })
+            //     .catch(error => console.log('Error fetching GitHub data:', error));
+        });
+
+        // Efek ketik untuk nama (opsional)
+        const nameElement = document.getElementById('name');
+        const originalName = nameElement.textContent;
+        nameElement.textContent = '';
+        
+        let i = 0;
+        function typeWriter() {
+            if (i < originalName.length) {
+                nameElement.textContent += originalName.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+        
+        // Mulai efek ketik setelah halaman dimuat
+        setTimeout(typeWriter, 1000);
+    </script>
+</body>
+</html>
